@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from django.http import JsonResponse
+from products.models import Product
+from products.forms import ProductFrom
 
-# Create your views here.
+
+def get_products(request):
+    if request.method == 'GET':
+        return JsonResponse(list(Product.objects.all().values('name','price')), safe=False)
+    elif request.method == 'POST':
+        form = ProductFrom(request.POST)
+        if form.is_valid():
