@@ -33,4 +33,7 @@ class CartItem(models.Model):
         return self.product.price * self.quantity
 
     def str(self):
+        return self.user.username
+
+    def str(self):
         return self.product.name
